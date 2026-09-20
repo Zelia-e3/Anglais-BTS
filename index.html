@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English Boost BTS</title>
+<style>
+:root{--navy:#112b5d;--blue:#3564ff;--bg:#f5f7fc;--card:#fff;--ink:#17213a;--muted:#68738b;--line:#e0e5f0;--green:#16865c;--red:#c83f4b;--gold:#a96c00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(135deg,#112b5d,#254b9a);color:#fff;padding:24px 16px}.wrap{max-width:1050px;margin:auto}
+h1{margin:0;font-size:29px}.tag{margin-top:6px;opacity:.9}.stats{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.pill{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:999px}
+main{padding:18px 14px 60px}.levels{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 20px}.level{background:#fff;border:2px solid var(--line);color:var(--ink)}.level.active{border-color:var(--blue);background:#edf1ff;color:#2345ae}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 6px 20px #18336b0e}.card .ico{font-size:30px}.card h3{margin:7px 0}.card p{color:var(--muted);font-size:14px;min-height:42px;margin:0 0 14px}
+button{border:0;border-radius:11px;padding:11px 14px;font-weight:750;cursor:pointer}.go{background:var(--blue);color:#fff;width:100%}.soft{background:#edf1ff;color:#29459d}.red{background:#fff0f1;color:#a52e3b}
+#trainer{display:none}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.progress{height:9px;background:#e3e7ef;border-radius:99px;overflow:hidden;margin:15px 0}.bar{height:100%;background:var(--blue)}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.prompt{font-size:23px;font-weight:780;margin:14px 0 18px;line-height:1.35}
+input{width:100%;padding:14px;border:2px solid var(--line);border-radius:11px;font-size:18px;outline:none}input:focus{border-color:var(--blue)}
+.options{display:grid;gap:9px}.opt{text-align:left;background:#f8f9fd;border:2px solid var(--line)}.opt.sel{border-color:var(--blue);background:#eef2ff}
+.feedback{display:none;padding:13px;border-radius:11px;margin-top:14px}.correct{background:#e9f8f1;color:#0a6643}.wrong{background:#fff0f1;color:#982f3a}
+.row{display:flex;gap:9px;margin-top:13px}.row button{flex:1}.note{color:var(--muted);font-size:13px}.section{margin:24px 0 12px}.badge{display:inline-block;background:#eef2ff;color:#29459d;padding:4px 8px;border-radius:8px;font-size:12px}
+</style></head>
+<body>
+<header><div class="wrap"><h1>🇬🇧 English Boost BTS</h1><div class="tag">Apprends à ton rythme • choisis ce que tu veux travailler</div></div></header>
+<main class="wrap">
+<section id="home">
+<div class="stats"><div class="pill">⭐ <b id="score">0</b> points</div><div class="pill">✅ <b id="right">0</b> bonnes réponses</div><div class="pill">📚 <b id="answered">0</b> questions</div><div class="pill">❤️ <b id="mistakes">0</b> à revoir</div></div>
+<h2>1. Choisis ton niveau</h2>
+<div class="levels"><button class="level active" data-level="base">🌱 Bases</button><button class="level" data-level="inter">📈 Intermédiaire</button><button class="level" data-level="bts">🎓 BTS</button></div>
+<div class="card" style="margin-bottom:18px"><b>🚀 Progression automatique</b><p style="min-height:0;margin-top:7px">Le vocabulaire commence simple. Quand tu maîtrises plusieurs mots, le site débloque progressivement des mots et expressions plus difficiles. Les mots réussis reviennent moins souvent ; tes difficultés reviennent davantage.</p></div>
+<h2>2. Choisis ton exercice</h2>
+<div class="grid">
+<div class="card"><div class="ico">🇫🇷→🇬🇧</div><h3>Vocabulaire</h3><p>Écris la traduction anglaise. Pas de QCM : tu dois retrouver le mot.</p><button class="go" onclick="start('vocabFR')">Commencer</button></div>
+<div class="card"><div class="ico">🇬🇧→🇫🇷</div><h3>Comprendre les mots</h3><p>Traduis les mots anglais en français pour travailler la compréhension.</p><button class="go" onclick="start('vocabEN')">Commencer</button></div>
+<div class="card"><div class="ico">✍️</div><h3>Phrases à trous</h3><p>Complète une phrase avec le bon verbe ou le bon mot.</p><button class="go" onclick="start('fill')">Commencer</button></div>
+<div class="card"><div class="ico">🧩</div><h3>Construire une phrase</h3><p>Remets les mots dans le bon ordre pour former une phrase correcte.</p><button class="go" onclick="start('order')">Commencer</button></div>
+<div class="card"><div class="ico">🕵️</div><h3>Trouve l'erreur</h3><p>Repère et corrige une erreur de grammaire dans une phrase.</p><button class="go" onclick="start('error')">Commencer</button></div>
+<div class="card"><div class="ico">⚡</div><h3>Verbes irréguliers</h3><p>Entraîne-toi sur le prétérit et le participe passé.</p><button class="go" onclick="start('irregular')">Commencer</button></div>
+<div class="card"><div class="ico">⏳</div><h3>Choisir le bon temps</h3><p>Présent, prétérit ou present perfect selon le contexte.</p><button class="go" onclick="start('tense')">Commencer</button></div>
+<div class="card"><div class="ico">❓</div><h3>Questions & négations</h3><p>Travaille do, does, did, don't, doesn't et les auxiliaires.</p><button class="go" onclick="start('questions')">Commencer</button></div>
+<div class="card"><div class="ico">🔗</div><h3>Prépositions</h3><p>Choisis entre in, on, at, to, for, since et autres petits mots.</p><button class="go" onclick="start('preps')">Commencer</button></div>
+<div class="card"><div class="ico">💬</div><h3>Expressions utiles</h3><p>Les phrases du quotidien pour comprendre et parler plus naturellement.</p><button class="go" onclick="start('expressions')">Commencer</button></div>
+<div class="card"><div class="ico">🏢</div><h3>Anglais professionnel</h3><p>Clients, factures, réunions, e-mails, entreprise et vocabulaire BTS.</p><button class="go" onclick="start('business')">Commencer</button></div>
+<div class="card"><div class="ico">📖</div><h3>Mini compréhension</h3><p>Lis un court texte anglais puis réponds à une question.</p><button class="go" onclick="start('reading')">Commencer</button></div>
+<div class="card"><div class="ico">🌍</div><h3>Traduction de phrases</h3><p>Traduis des phrases complètes du français vers l'anglais.</p><button class="go" onclick="start('translate')">Commencer</button></div>
+<div class="card"><div class="ico">❤️</div><h3>Mes erreurs</h3><p>Refais uniquement les questions que tu as ratées auparavant.</p><button class="go" onclick="startMistakes()">Réviser mes erreurs</button></div>
+<div class="card"><div class="ico">🎲</div><h3>Exercice aléatoire</h3><p>Le site choisit un type d'exercice pour toi à chaque série.</p><button class="go" onclick="randomExercise()">Surprends-moi</button></div>
+<div class="card"><div class="ico">🔥</div><h3>Mini-test</h3><p>20 questions mélangées pour voir ce que tu maîtrises vraiment.</p><button class="go" onclick="start('mixed')">Lancer le test</button></div>
+</div>
+<p class="note section">💡 Les mêmes notions reviennent sous des formes différentes : un mot peut apparaître en traduction, puis dans une phrase, puis dans un exercice professionnel. C'est volontaire pour mieux le mémoriser sans refaire toujours le même exercice.</p>
+</section>
+<section id="trainer">
+<div class="top"><button class="soft" onclick="back()">← Menu</button><b id="exerciseTitle"></b></div>
+<div class="progress"><div class="bar" id="bar" style="width:0"></div></div><div class="note" id="count"></div>
+<div class="qcard"><span class="badge" id="levelBadge"></span><div class="prompt" id="prompt"></div><div id="answerBox"></div><div class="feedback" id="feedback"></div><div class="row"><button class="go" id="check" onclick="checkAnswer()">Vérifier</button><button class="soft" id="next" style="display:none" onclick="nextQ()">Suivante →</button></div></div>
+</section>
+</main>
+<script>
+
+// --- Progression adaptative V5 ---
+const vocabLevels = {
+  base: [
+    [["être","be"],["avoir","have"],["faire","do"],["aller","go"],["venir","come"],["aimer","like"],["vouloir","want"],["besoin","need"],["travail","work"],["ami","friend"]],
+    [["acheter","buy"],["vendre","sell"],["prendre","take"],["donner","give"],["trouver","find"],["parler","speak"],["écrire","write"],["lire","read"],["comprendre","understand"],["aider","help"]],
+    [["choisir","choose"],["apprendre","learn"],["oublier","forget"],["se souvenir","remember"],["essayer","try"],["changer","change"],["attendre","wait"],["envoyer","send"],["recevoir","receive"],["expliquer","explain"]]
+  ],
+  inter: [
+    [["améliorer","improve"],["augmenter","increase"],["diminuer","decrease"],["réussir","succeed"],["décider","decide"],["développer","develop"],["prévoir","plan"],["gérer","manage"],["atteindre","reach"],["éviter","avoid"]],
+    [["permettre","allow"],["exiger","require"],["soutenir","support"],["fournir","provide"],["traiter","deal with"],["résoudre","solve"],["comparer","compare"],["décrire","describe"],["suggérer","suggest"],["conseiller","advise"]],
+    [["atteindre un objectif","achieve a goal"],["faire face à","face"],["mettre en place","set up"],["prendre en charge","take care of"],["être responsable de","be responsible for"],["se concentrer sur","focus on"],["dépendre de","depend on"],["postuler à","apply for"],["participer à","take part in"],["avoir lieu","take place"]]
+  ],
+  bts: [
+    [["chiffre d'affaires","turnover"],["part de marché","market share"],["chaîne d'approvisionnement","supply chain"],["main-d'œuvre","workforce"],["partie prenante","stakeholder"],["actionnaire","shareholder"],["croissance","growth"],["revenus","revenue"],["dépenses","expenses"],["rentabilité","profitability"]],
+    [["avantage concurrentiel","competitive advantage"],["satisfaction client","customer satisfaction"],["fidélisation client","customer loyalty"],["notoriété de la marque","brand awareness"],["ressources humaines","human resources"],["conditions de travail","working conditions"],["développement durable","sustainable development"],["coûts de production","production costs"],["prévisions de ventes","sales forecast"],["enquête de satisfaction","satisfaction survey"]],
+    [["sensibiliser","raise awareness"],["faire face à un défi","face a challenge"],["répondre aux attentes","meet expectations"],["atteindre un objectif","achieve a target"],["réduire les coûts","cut costs"],["stimuler les ventes","boost sales"],["lancer un produit","launch a product"],["pénétrer un marché","enter a market"],["se démarquer","stand out"],["renforcer une marque","strengthen a brand"]]
+  ]
+};
+let mastery = JSON.parse(localStorage.getItem("ebMastery5") || "{}");
+function skillKey(l,p,a){return l+"|"+p+"|"+a}
+function adaptiveVocab(l){
+  let stages=vocabLevels[l]||vocabLevels.base;
+  let flat=[];
+  stages.forEach((stage,si)=>stage.forEach(pair=>{
+    let key=skillKey(l,pair[0],pair[1]), m=mastery[key]||0;
+    flat.push({pair,stage:si,m,key});
+  }));
+  // Unlock harder stages as easier vocabulary is mastered.
+  let mastered0=flat.filter(x=>x.stage===0 && x.m>=2).length;
+  let unlock = mastered0>=5 ? 1 : 0;
+  let mastered1=flat.filter(x=>x.stage===1 && x.m>=2).length;
+  if(unlock===1 && mastered1>=5) unlock=2;
+  let pool=flat.filter(x=>x.stage<=unlock);
+  // Unmastered/weak words appear more often; mastered words remain occasionally for spaced review.
+  let weighted=[];
+  pool.forEach(x=>{
+    let copies=x.m<=0?5:x.m===1?3:x.m===2?1:0.35;
+    for(let i=0;i<Math.ceil(copies);i++) weighted.push(x);
+  });
+  return shuf(weighted).filter((x,i,a)=>a.findIndex(y=>y.key===x.key)===i).slice(0,20);
+}
+
+const data={
+base:{
+vocabFR:[["être","be"],["avoir","have"],["faire","do"],["aller","go"],["venir","come"],["prendre","take"],["donner","give"],["vouloir","want"],["avoir besoin de","need"],["aimer","like"],["savoir","know"],["penser","think"],["dire","say"],["voir","see"],["trouver","find"],["travailler","work"],["parler","speak"],["lire","read"],["écrire","write"],["acheter","buy"],["vendre","sell"],["aider","help"],["maison","house"],["travail","work"],["ami","friend"],["aujourd'hui","today"],["demain","tomorrow"],["hier","yesterday"],["toujours","always"],["souvent","often"]],
+vocabEN:[["happy","heureux"],["tired","fatigué"],["easy","facile"],["difficult","difficile"],["early","tôt"],["late","en retard"],["morning","matin"],["evening","soir"],["week","semaine"],["money","argent"],["food","nourriture"],["shop","magasin"],["car","voiture"],["street","rue"],["family","famille"]],
+fill:[["I ___ tired today. (être)","am"],["She ___ a car. (avoir)","has"],["We ___ every day. (travailler)","work"],["He ___ to school by bus. (aller)","goes"],["I ___ English. (aimer)","like"],["They ___ help. (avoir besoin de)","need"],["She ___ English. (parler)","speaks"],["I ___ my homework every evening. (faire)","do"]],
+order:[["Remets dans l'ordre : work / I / every day","i work every day"],["Remets dans l'ordre : is / she / happy","she is happy"],["Remets dans l'ordre : have / we / a car","we have a car"],["Remets dans l'ordre : English / speaks / he","he speaks english"],["Remets dans l'ordre : don't / I / know","i don't know"]],
+error:[["Corrige : She work every day.","she works every day"],["Corrige : I is tired.","i am tired"],["Corrige : He have a car.","he has a car"],["Corrige : They is ready.","they are ready"],["Corrige : She don't know.","she doesn't know"]],
+irregular:[["GO → prétérit","went"],["DO → prétérit","did"],["HAVE → prétérit","had"],["BUY → prétérit","bought"],["TAKE → prétérit","took"],["SEE → prétérit","saw"],["COME → prétérit","came"],["GIVE → prétérit","gave"],["FIND → prétérit","found"],["SAY → prétérit","said"]],
+tense:[["Yesterday, I ___ to work. (go)","went"],["Every day, she ___ at 8. (start)","starts"],["Last week, we ___ a computer. (buy)","bought"],["He usually ___ by bus. (travel)","travels"]],
+questions:[["Complète : ___ you work here?","do"],["Complète : ___ she speak English?","does"],["Complète : I ___ understand.","don't"],["Complète : She ___ work here.","doesn't"],["Complète : ___ they ready?","are"]],
+preps:[["I am ___ work.","at"],["The meeting is ___ Monday.","on"],["I wake up ___ 7 a.m.","at"],["I live ___ France.","in"],["I go ___ work.","to"]],
+expressions:[["Comment dit-on : « Je ne comprends pas » ?","i don't understand"],["« Pouvez-vous répéter ? »","can you repeat"],["« Comment allez-vous ? »","how are you"],["« Merci beaucoup »","thank you very much"],["« À demain »","see you tomorrow"]],
+business:[["client","customer"],["entreprise","company"],["réunion","meeting"],["facture","invoice"],["prix","price"],["commande","order"],["employé","employee"],["travail","job"],["bureau","office"],["e-mail","email"]],
+reading:[["Tom works in a small shop. He starts at 9 a.m. and finishes at 5 p.m.\nÀ quelle heure commence-t-il ?","9 a.m."],["Sarah has a meeting on Monday. The meeting is with a new customer.\nAvec qui est la réunion ?","a new customer"]],
+translate:[["Je travaille tous les jours.","i work every day"],["Elle est fatiguée.","she is tired"],["Nous avons une réunion.","we have a meeting"],["Je ne comprends pas.","i don't understand"],["Est-ce que tu travailles ici ?","do you work here"]]
+},
+inter:{
+vocabFR:[["améliorer","improve"],["augmenter","increase"],["diminuer","decrease"],["choisir","choose"],["réussir","succeed"],["expliquer","explain"],["recevoir","receive"],["envoyer","send"],["attendre","wait"],["apprendre","learn"],["oublier","forget"],["se souvenir","remember"],["changer","change"],["essayer","try"],["décider","decide"]],
+vocabEN:[["although","bien que"],["however","cependant"],["therefore","donc"],["instead","à la place"],["enough","assez"],["available","disponible"],["useful","utile"],["successful","réussi"],["improvement","amélioration"],["choice","choix"]],
+fill:[["I have ___ this email. (recevoir)","received"],["She ___ the company last year. (rejoindre)","joined"],["We are ___ for the customer. (attendre)","waiting"],["Sales have ___. (augmenter)","increased"],["He ___ the problem yesterday. (expliquer)","explained"]],
+order:[["Remets dans l'ordre : have / I / finished / already","i have already finished"],["Remets dans l'ordre : yesterday / sent / she / the invoice","she sent the invoice yesterday"],["Remets dans l'ordre : since / worked / here / 2025 / has / he","he has worked here since 2025"]],
+error:[["Corrige : I have saw this film.","i have seen this film"],["Corrige : She didn't went to work.","she didn't go to work"],["Corrige : We have finished yesterday.","we finished yesterday"],["Corrige : He work here since 2025.","he has worked here since 2025"]],
+irregular:[["WRITE → prétérit","wrote"],["WRITE → participe passé","written"],["SPEAK → prétérit","spoke"],["SPEAK → participe passé","spoken"],["KNOW → prétérit","knew"],["KNOW → participe passé","known"],["THINK → prétérit","thought"],["LEAVE → prétérit","left"],["MEET → prétérit","met"]],
+tense:[["I ___ here since 2025. (work)","have worked"],["She ___ the invoice yesterday. (send)","sent"],["We usually ___ at 9. (start)","start"],["He has already ___ the customer. (call)","called"]],
+questions:[["Transforme en question : She works here.","does she work here"],["Transforme en négation : He went to London.","he didn't go to london"],["Complète : How long ___ you worked here?","have"],["Complète : Why ___ she leave yesterday?","did"]],
+preps:[["I have worked here ___ 2025.","since"],["I have worked here ___ two years.","for"],["The report is ___ the desk.","on"],["She is responsible ___ sales.","for"],["We spoke ___ the problem.","about"]],
+expressions:[["« Je suis d'accord »","i agree"],["« Je ne suis pas sûr(e) »","i'm not sure"],["« Cela dépend »","it depends"],["« À mon avis »","in my opinion"],["« D'une part »","on the one hand"]],
+business:[["fournisseur","supplier"],["date limite","deadline"],["compétences","skills"],["chiffre d'affaires","turnover"],["bénéfice","profit"],["perte","loss"],["marché","market"],["concurrent","competitor"],["responsable","manager"],["équipe","team"]],
+reading:[["A company introduced flexible working hours last year. Employees can now start between 8 and 10 a.m. Management says productivity has improved.\nQu'est-ce qui s'est amélioré ?","productivity"],["Sales increased by 15% this year, but costs also rose because energy became more expensive.\nDe combien les ventes ont-elles augmenté ?","15%"]],
+translate:[["J'ai envoyé la facture hier.","i sent the invoice yesterday"],["Elle travaille ici depuis deux ans.","she has worked here for two years"],["Les ventes ont augmenté.","sales have increased"],["Nous devons prendre une décision.","we need to make a decision"],["Je suis d'accord avec cette idée.","i agree with this idea"]]
+},
+bts:{
+vocabFR:[["chiffre d'affaires","turnover"],["part de marché","market share"],["partie prenante","stakeholder"],["chaîne d'approvisionnement","supply chain"],["main-d'œuvre","workforce"],["siège social","head office"],["candidature","application"],["entretien d'embauche","job interview"],["avantage concurrentiel","competitive advantage"],["croissance","growth"],["durabilité","sustainability"],["bénéfice","profit"],["coûts","costs"],["revenus","revenue"],["objectif","target"]],
+vocabEN:[["recruitment","recrutement"],["workforce","main-d'œuvre"],["shareholder","actionnaire"],["stakeholder","partie prenante"],["revenue","revenus"],["expenses","dépenses"],["growth","croissance"],["survey","enquête"],["brand awareness","notoriété de la marque"],["customer satisfaction","satisfaction client"]],
+fill:[["The company wants to ___ its market share. (augmenter)","increase"],["Our main ___ is customer satisfaction. (objectif)","goal"],["The ___ sent the goods yesterday. (fournisseur)","supplier"],["The company reported higher ___ this year. (bénéfices)","profits"],["We need to meet the ___. (date limite)","deadline"]],
+order:[["Remets dans l'ordre : increased / by / sales / 20 percent / have","sales have increased by 20 percent"],["Remets dans l'ordre : improve / company / wants / productivity / the / to","the company wants to improve productivity"],["Remets dans l'ordre : customer / is / priority / satisfaction / a","customer satisfaction is a priority"]],
+error:[["Corrige : Sales has increased by 10%.","sales have increased by 10%"],["Corrige : The company want to recruit staff.","the company wants to recruit staff"],["Corrige : We discussed about the new strategy.","we discussed the new strategy"],["Corrige : The informations are useful.","the information is useful"]],
+irregular:[["RISE → prétérit","rose"],["RISE → participe passé","risen"],["LEAD → prétérit","led"],["GROW → prétérit","grew"],["GROW → participe passé","grown"],["CHOOSE → prétérit","chose"],["CHOOSE → participe passé","chosen"]],
+tense:[["Sales ___ by 12% last year. (increase)","increased"],["The company ___ significantly since 2024. (grow)","has grown"],["Management usually ___ quarterly results in April. (publish)","publishes"],["The firm ___ a new strategy last month. (launch)","launched"]],
+questions:[["Transforme : The company launched a product. → question","did the company launch a product"],["Complète : How much ___ sales increased?","have"],["Transforme en négation : Profits increased.","profits didn't increase"],["Complète : Why ___ the company change its strategy?","did"]],
+preps:[["Sales increased ___ 10%.","by"],["Sales increased ___ €2m to €2.5m.","from"],["The company invested ___ new equipment.","in"],["We are responsible ___ customer relations.","for"],["There was a fall ___ demand.","in"]],
+expressions:[["« Selon le document »","according to the document"],["« Le graphique montre que… »","the chart shows that"],["« En revanche »","on the other hand"],["« L'objectif principal est… »","the main objective is"],["« Cela pourrait permettre à l'entreprise de… »","this could allow the company to"]],
+business:[["part de marché","market share"],["chaîne d'approvisionnement","supply chain"],["actionnaire","shareholder"],["partie prenante","stakeholder"],["ressources humaines","human resources"],["service client","customer service"],["avantage concurrentiel","competitive advantage"],["coûts de production","production costs"],["croissance des ventes","sales growth"],["satisfaction client","customer satisfaction"]],
+reading:[["A French SME launched an online store in 2025 to reach customers abroad. Online sales now represent 30% of its turnover. However, delivery costs have increased.\nQuel pourcentage du chiffre d'affaires vient des ventes en ligne ?","30%"],["Employee turnover was high, so the company introduced flexible hours and remote working. Six months later, staff satisfaction increased.\nPourquoi l'entreprise a-t-elle changé ses conditions de travail ?","employee turnover was high"]],
+translate:[["Le chiffre d'affaires a augmenté de 10 %.","turnover increased by 10%"],["L'entreprise souhaite améliorer la satisfaction client.","the company wants to improve customer satisfaction"],["Selon le graphique, les ventes ont diminué.","according to the chart sales decreased"],["Le principal objectif est de réduire les coûts.","the main objective is to reduce costs"],["Cette stratégie pourrait augmenter la part de marché.","this strategy could increase market share"]]
+}};
+const titles={vocabFR:"Vocabulaire français → anglais",vocabEN:"Comprendre les mots",fill:"Phrases à trous",order:"Construire une phrase",error:"Trouve l'erreur",irregular:"Verbes irréguliers",tense:"Choisir le bon temps",questions:"Questions & négations",preps:"Prépositions",expressions:"Expressions utiles",business:"Anglais professionnel",reading:"Mini compréhension",translate:"Traduction de phrases",mixed:"Mini-test"};
+let level="base", session=[],idx=0,answeredNow=false,currentType="";
+let stats=JSON.parse(localStorage.getItem("ebStats4")||'{"score":0,"right":0,"answered":0,"mistakes":[]}');
+const $=id=>document.getElementById(id);
+function normalize(s){return s.toLowerCase().trim().replace(/[.,?!]/g,"").replace(/’/g,"'").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ")}
+function updateStats(){$("score").textContent=stats.score;$("right").textContent=stats.right;$("answered").textContent=stats.answered;$("mistakes").textContent=stats.mistakes.length;localStorage.setItem("ebStats4",JSON.stringify(stats))}
+document.querySelectorAll(".level").forEach(b=>b.onclick=()=>{document.querySelectorAll(".level").forEach(x=>x.classList.remove("active"));b.classList.add("active");level=b.dataset.level});
+function shuf(a){return [...a].sort(()=>Math.random()-.5)}
+function q(type,pair){return {type,prompt:pair[0],answer:pair[1]}}
+function start(type){
+ currentType=type; let arr=[];
+ if(type==="vocabFR"){
+   session=adaptiveVocab(level).map(x=>({type:"vocabFR",prompt:x.pair[0],answer:x.pair[1],masteryKey:x.key}));
+ } else if(type==="vocabEN"){
+   session=adaptiveVocab(level).map(x=>({type:"vocabEN",prompt:x.pair[1],answer:x.pair[0],masteryKey:x.key}));
+ } else if(type==="mixed"){
+   let keys=["fill","irregular","tense","questions","preps","business","translate"];
+   adaptiveVocab(level).slice(0,6).forEach(x=>arr.push({type:"vocabFR",prompt:x.pair[0],answer:x.pair[1],masteryKey:x.key}));
+   keys.forEach(k=>(data[level][k]||[]).forEach(x=>arr.push(q(k,x))));
+   session=shuf(arr).slice(0,20);
+ } else {
+   session=shuf((data[level][type]||[]).map(x=>q(type,x))).slice(0,20);
+ }
+ if(!session.length){alert("Cette série arrive bientôt !");return}
+ idx=0;$("home").style.display="none";$("trainer").style.display="block";$("exerciseTitle").textContent=titles[type]||"Mes erreurs";show()
+}
+function startMistakes(){if(!stats.mistakes.length){alert("Tu n'as pas encore d'erreurs à réviser 🎉");return}session=shuf(stats.mistakes).slice(0,20);currentType="mistakes";idx=0;$("home").style.display="none";$("trainer").style.display="block";$("exerciseTitle").textContent="❤️ Mes erreurs";show()}
+function randomExercise(){let keys=["vocabFR","vocabEN","fill","order","error","irregular","tense","questions","preps","expressions","business","reading","translate"];start(keys[Math.floor(Math.random()*keys.length)])}
+function show(){answeredNow=false;let z=session[idx];$("prompt").textContent=z.prompt;$("answerBox").innerHTML='<input id="userAnswer" autocomplete="off" placeholder="Écris ta réponse ici…">';$("feedback").style.display="none";$("check").style.display="block";$("next").style.display="none";$("count").textContent=`Question ${idx+1} / ${session.length}`;$("bar").style.width=`${idx/session.length*100}%`;$("levelBadge").textContent=level==="base"?"🌱 Bases":level==="inter"?"📈 Intermédiaire":"🎓 BTS";setTimeout(()=>{let i=$("userAnswer");if(i){i.focus();i.onkeydown=e=>{if(e.key==="Enter")answeredNow?nextQ():checkAnswer()}}},30)}
+function checkAnswer(){let inp=$("userAnswer");if(!inp||!inp.value.trim())return;let z=session[idx],ok=normalize(inp.value)===normalize(z.answer);stats.answered++;if(ok){if(z.masteryKey){mastery[z.masteryKey]=(mastery[z.masteryKey]||0)+1;localStorage.setItem("ebMastery5",JSON.stringify(mastery));}stats.right++;stats.score+=10;$("feedback").className="feedback correct";$("feedback").textContent="✅ Bravo ! Bonne réponse.";stats.mistakes=stats.mistakes.filter(m=>!(m.prompt===z.prompt&&m.answer===z.answer))}else{if(z.masteryKey){mastery[z.masteryKey]=Math.max(0,(mastery[z.masteryKey]||0)-1);localStorage.setItem("ebMastery5",JSON.stringify(mastery));}$("feedback").className="feedback wrong";$("feedback").innerHTML=`❌ Bonne réponse : <b>${z.answer}</b>`;if(!stats.mistakes.some(m=>m.prompt===z.prompt&&m.answer===z.answer))stats.mistakes.push(z)}$("feedback").style.display="block";answeredNow=true;$("check").style.display="none";$("next").style.display="block";updateStats()}
+function nextQ(){if(idx<session.length-1){idx++;show()}else{$("bar").style.width="100%";$("prompt").textContent="🎉 Série terminée !";$("answerBox").innerHTML="<p>Choisis une autre activité ou révise tes erreurs.</p>";$("feedback").style.display="none";$("check").style.display="none";$("next").textContent="Retour au menu";$("next").onclick=back}}
+function back(){$("trainer").style.display="none";$("home").style.display="block";$("next").textContent="Suivante →";$("next").onclick=nextQ;updateStats()}
+updateStats();
+</script></body></html>
